@@ -2,11 +2,11 @@ package cc.funkemunky.test;
 
 public class Main {
 
-    static float motionX, motionZ = 0.2806f, rotationYaw = 90, moveForward = 0.98f, moveStrafing = 0, aiSpeed = 0.699999988079071f;
+    static float motionX = .2806f, motionZ, rotationYaw = 90, moveForward = 1, moveStrafing = 0;
     static boolean onGround = true;
     public static void main(String[] args) {
-        float strafe = 0, forward = 1, friction = onGround ?  0.16277136F / (0.68f * 0.68f * 0.68f) * aiSpeed : 0.026f;
-
+        jump();
+        float strafe = 0, forward = 1, friction = 0.68f;
         float f = strafe * strafe + forward * forward;
 
         if (f >= 1.0E-4F) {
@@ -21,11 +21,11 @@ public class Main {
             forward = forward * f;
             float f1 = (float) Math.sin(90 * (float) Math.PI / 180.0F);
             float f2 = (float) Math.cos(90 * (float) Math.PI / 180.0F);
-            motionX += (double) (strafe * f2 - forward * f1);
-            motionZ += (double) (forward * f2 + strafe * f1);
+            Main.motionX += (double) (strafe * f2 - forward * f1);
+            Main.motionZ += (double) (forward * f2 + strafe * f1);
 
-            motionZ*= onGround ? 0.68 : 0.91;
-            motionX*= onGround ? 0.68 : 0.91;
+            motionX*= friction;
+            motionZ*= rotationYaw;
 
             System.out.println(motionX + ", " + motionZ + ", " + Math.sqrt(motionZ * motionZ + motionX * motionX));
         }
