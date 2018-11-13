@@ -3,10 +3,10 @@ package cc.funkemunky.test;
 public class Main {
 
     static float motionX = .2806f, motionZ, rotationYaw = 90, moveForward = 1, moveStrafing = 0;
-    static boolean onGround = true;
+    static boolean onGround = false;
     public static void main(String[] args) {
         jump();
-        float strafe = 0, forward = 1, friction = 0.68f;
+        float strafe = 0, forward = .98f, friction = 0.026f;
         float f = strafe * strafe + forward * forward;
 
         if (f >= 1.0E-4F) {
@@ -23,9 +23,6 @@ public class Main {
             float f2 = (float) Math.cos(90 * (float) Math.PI / 180.0F);
             Main.motionX += (double) (strafe * f2 - forward * f1);
             Main.motionZ += (double) (forward * f2 + strafe * f1);
-
-            motionX*= friction;
-            motionZ*= rotationYaw;
 
             System.out.println(motionX + ", " + motionZ + ", " + Math.sqrt(motionZ * motionZ + motionX * motionX));
         }
